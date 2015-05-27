@@ -15,7 +15,9 @@ int main(){
 
 	char chr[52], a;
 
-	for(int i = 0; i < 26; i++){
+	int i = 0;
+
+	for(i = 0; i < 26; i++){
 		if(i%2 == 0){
 			chr[i] = 65+(i/2);
 		}
