@@ -4,12 +4,33 @@
 5 - * * - 6
 */
 
-# include <avr/io.h>
-# include <util/delay.h>
+#include <avr/io.h>
+#include <util/delay.h>
+#include "spi.h"
+#include "sd.h"
+#include "fat16.h"
+#include "player.h"
+#include "uart.h"
 
 
 
 int main(){
+
+	init_uart();
+	spi_init();
+	LED_CFG;
+	
+	INPUT_CFG;
+	INPUT_ON;
+	
+	init_pwm();
+	
+	sei();
+
+	sd_init();
+
+	fat16_init();
+
 	DDRD = 0b01111110;
 	PORTD = 0b00000000;
 
@@ -31,33 +52,33 @@ int main(){
 		a = chr[j%52];
 		
 		switch(a){
-			case 'A' : PORTD = 0b01000000; break;
-			case 'B' : PORTD = 0b01010000; break;
-			case 'C' : PORTD = 0b01100000; break;
-			case 'D' : PORTD = 0b01101000; break;
-			case 'E' : PORTD = 0b01001000; break;
-			case 'F' : PORTD = 0b01110000; break;
-			case 'G' : PORTD = 0b01111000; break;
-			case 'H' : PORTD = 0b01011000; break;
-			case 'I' : PORTD = 0b00110000; break;
-			case 'J' : PORTD = 0b00111000; break;
-			case 'K' : PORTD = 0b01000100; break;
-			case 'L' : PORTD = 0b01010100; break;
-			case 'M' : PORTD = 0b01100100; break;
-			case 'N' : PORTD = 0b01101100; break;
-			case 'O' : PORTD = 0b01001100; break;
-			case 'P' : PORTD = 0b01110100; break;
-			case 'Q' : PORTD = 0b01111100; break;
-			case 'R' : PORTD = 0b01011100; break;
-			case 'S' : PORTD = 0b00110100; break;
-			case 'T' : PORTD = 0b00111100; break;
-			case 'U' : PORTD = 0b01000110; break;
-			case 'V' : PORTD = 0b01010110; break;
-			case 'W' : PORTD = 0b00111010; break;
-			case 'X' : PORTD = 0b01100110; break;
-			case 'Y' : PORTD = 0b01101110; break;
-			case 'Z' : PORTD = 0b01001110; break;
-			case ' ' : PORTD = 0b00000000; break;
+			case 'A' : PORTD = 0b01000000; play_file(a,"raw"); break;
+			case 'B' : PORTD = 0b01010000; play_file(a,"raw"); break;
+			case 'C' : PORTD = 0b01100000; play_file(a,"raw"); break;
+			case 'D' : PORTD = 0b01101000; play_file(a,"raw"); break;
+			case 'E' : PORTD = 0b01001000; play_file(a,"raw"); break;
+			case 'F' : PORTD = 0b01110000; play_file(a,"raw"); break;
+			case 'G' : PORTD = 0b01111000; play_file(a,"raw"); break;
+			case 'H' : PORTD = 0b01011000; play_file(a,"raw"); break;
+			case 'I' : PORTD = 0b00110000; play_file(a,"raw"); break;
+			case 'J' : PORTD = 0b00111000; play_file(a,"raw"); break;
+			case 'K' : PORTD = 0b01000100; play_file(a,"raw"); break;
+			case 'L' : PORTD = 0b01010100; play_file(a,"raw"); break;
+			case 'M' : PORTD = 0b01100100; play_file(a,"raw"); break;
+			case 'N' : PORTD = 0b01101100; play_file(a,"raw"); break;
+			case 'O' : PORTD = 0b01001100; play_file(a,"raw"); break;
+			case 'P' : PORTD = 0b01110100; play_file(a,"raw"); break;
+			case 'Q' : PORTD = 0b01111100; play_file(a,"raw"); break;
+			case 'R' : PORTD = 0b01011100; play_file(a,"raw"); break;
+			case 'S' : PORTD = 0b00110100; play_file(a,"raw"); break;
+			case 'T' : PORTD = 0b00111100; play_file(a,"raw"); break;
+			case 'U' : PORTD = 0b01000110; play_file(a,"raw"); break;
+			case 'V' : PORTD = 0b01010110; play_file(a,"raw"); break;
+			case 'W' : PORTD = 0b00111010; play_file(a,"raw"); break;
+			case 'X' : PORTD = 0b01100110; play_file(a,"raw"); break;
+			case 'Y' : PORTD = 0b01101110; play_file(a,"raw"); break;
+			case 'Z' : PORTD = 0b01001110; play_file(a,"raw"); break;
+			case ' ' : PORTD = 0b00000000; play_file(a,"raw"); break;
 		}
 		j++;
 		_delay_ms(500);
