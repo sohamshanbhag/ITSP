@@ -18,7 +18,7 @@ int main(){
 
 	init_uart();
 	spi_init();
-	LED_CFG;
+	
 	
 	INPUT_CFG;
 	INPUT_ON;

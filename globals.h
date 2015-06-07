@@ -54,10 +54,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <stdarg.h>
 
 
-#define LED_CFG					DDRC |= (1<<PC0);
-#define LED_OFF					PORTC &= ~(1<<PC0);
-#define LED_ON					PORTC |= (1<<PC0);
-
 // PA0 input
 #define INPUT_CFG				DDRA &= ~(1<<PA0);	
 #define INPUT_ON				PORTA |= (1<<PA0); // activate pullup
